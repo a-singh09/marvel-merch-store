@@ -22,7 +22,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
 
   return (
     <>
-      <header className="text-gray-400 bg-gray-900 body-font">
+      <header className="text-gray-400 bg-gray-900 body-font sticky top-0 z-10">
         <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
           <Link href={"/"} className="flex title-font font-medium items-center text-white mb-4 md:mb-0">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-10 h-10 text-white p-2 bg-red-500 rounded-full" viewBox="0 0 24 24">
@@ -46,11 +46,11 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
 
       <div
         ref={ref}
-        className={`h-screen sidebar absolute overflow-y-scroll right-0 top-0 p-10 bg-pink-50 z-10 backdrop-filter backdrop-blur-lg shadow-xl ring-1 ring-gray-900/5 transform transition-transform ${Object.keys(cart).length === 0 ? 'translate-x-full' : 'translate-x-0'} z-10`}>
+        className={`h-screen sidebar absolute overflow-y-scroll right-0 top-0 p-10 bg-gray-800 z-10 backdrop-filter backdrop-blur-lg shadow-xl ring-1 ring-gray-900/5 transform transition-transform ${Object.keys(cart).length === 0 ? 'translate-x-full' : 'translate-x-0'} z-10`}>
         <h2 className="text-xl font-bold text-center">Shopping Cart</h2>
         <span
           onClick={toggleCart}
-          className="absolute top-5 right-2  cursor-pointer text-pink-500 text-2xl">
+          className="absolute top-5 right-2  cursor-pointer text-red-600 text-2xl">
           <AiFillCloseCircle />
         </span>
         <ol className="list-decimal">
@@ -59,7 +59,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
           )}
           {Object.keys(cart).map((k) => {
             return (
-              <li key={k} className="hover:text-black">
+              <li key={k} className="hover:text-red-400">
                 <div className="item flex my-5">
                   <div className="w-2/3 font-semibold text-sm">
                     {cart[k].name}({cart[k].size}/{cart[k].variant})
@@ -76,7 +76,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                           cart[k].variant
                         );
                       }}
-                      className="text-pink-500"
+                      className="text-red-600"
                     />
                     <span className="mx-2">{cart[k].qty}</span>
                     <AiFillPlusSquare
@@ -90,7 +90,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                           cart[k].variant
                         );
                       }}
-                      className="text-pink-500"
+                      className="text-red-600"
                     />
                   </div>
                 </div>
@@ -103,14 +103,14 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
           <Link href={'/checkout'}><button
             // onClick={() => clearCart}
             type="button"
-            className="text-white bg-pink-500 hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center  mr-2 mb-2">
+            className="text-white bg-gray-8000 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center  mr-2 mb-2">
             <AiFillShopping className="text-lg mx-1" />
             Proceed
           </button></Link>
           <button
             onClick={clearCart}
             type="button"
-            className="text-white bg-pink-500 hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center  mr-2 mb-2">
+            className="text-white bg-gray-8000 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center  mr-2 mb-2">
 
             Clear Cart
           </button>
