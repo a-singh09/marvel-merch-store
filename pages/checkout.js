@@ -62,7 +62,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
               <li key={k} className="hover:text-red-400">
                 <div className="item flex my-5">
                   <div className=" font-semibold text-sm">
-                    {cart[k].name}
+                    {cart[k].name} ({cart[k].size}/{cart[k].variant})
                   </div>
                   <div className="w-1/3 flex font-semibold text-center justify-center items-center text-lg">
                     <AiFillMinusSquare
