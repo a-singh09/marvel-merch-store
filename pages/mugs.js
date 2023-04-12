@@ -149,6 +149,7 @@ export async function getServerSideProps(context) {
   }
 
   let products = await Product.find({ category: 'mugs' })
+  let mugs ={}
 
   for (let item of products) {
     if (item.title in mugs) {

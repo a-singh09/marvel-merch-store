@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import Product from '@/models/Product';
 
 import React from 'react'
+require('dotenv').config();
 
 const Post = ({ addToCart, buyNow, product, variants }) => {
     const router = useRouter()

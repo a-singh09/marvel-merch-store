@@ -3,6 +3,7 @@ import React from 'react'
 import Product from '../models/Product'
 import mongoose from 'mongoose'
 
+
 const Hoodies = ({ products }) => {
   return (
     <>
@@ -149,6 +150,7 @@ export async function getServerSideProps(context) {
   }
 
   let products = await Product.find({ category: 'hoodies' })
+  let hoodies = {}
 
   for (let item of products) {
     if (item.title in hoodies) {

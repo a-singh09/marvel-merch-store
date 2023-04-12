@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-
+require('dotenv').config();
 // aa lines chat gpt ch paa ke check karaange
 const connectDB = (handler) => async (req, res) =>{
 
