@@ -7,7 +7,7 @@ export default function Home() {
     <div>
       <Head>
         <title>
-          CoderClothing.com
+          MarvelStore.com
         </title>
       </Head>
 

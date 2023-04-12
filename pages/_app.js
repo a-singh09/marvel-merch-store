@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({})
   const [subTotal, setSubTotal] = useState(0)
   const [user, setUser] = useState({ value: null })
-  const [key, setKey] = useState(0)
+  const [key, setKey] = useState()
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
@@ -97,13 +97,13 @@ export default function App({ Component, pageProps }) {
     localStorage.removeItem('token')
     setUser({ value: null })
     setKey(Math.random())
+    router.push('/')
   }
 
 
   return <>
-    <LoadingBar color='#EF4444' height={3} progress={progress} onLoaderFinished={() => setProgress(0)} waitingTime={500}/>
-    <Navbar user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
-    <Component {...pageProps} logout={logout} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} buyNow={buyNow} />
+    <LoadingBar color='#EF4444' height={3} progress={progress} onLoaderFinished={() => setProgress(0)} waitingTime={500} />
+    {key && <Navbar user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />}    <Component {...pageProps} logout={logout} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} buyNow={buyNow} />
     <Footer cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
   </>
 }

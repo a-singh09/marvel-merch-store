@@ -10,11 +10,11 @@ const Post = ({ addToCart, buyNow, product, variants }) => {
     const router = useRouter()
     const { slug } = router.query
 
-    const [pin, setPin] = useState()
-    const [service, setService] = useState()
+    const [pin, setPin] = useState('')
+    const [service, setService] = useState('')
 
     const checkServiceAvailability = async () => {
-        let pins = await fetch('http://localhost:3000/api/pincode')
+        let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
         let pinJson = await pins.json()
         if (pinJson.includes(parseInt(pin))) {
             setService(true)
@@ -28,7 +28,7 @@ const Post = ({ addToCart, buyNow, product, variants }) => {
     }
 
     const refreshVariant = (newsize, newcolor) => {
-        const url = `http://localhost:3000/product/${variants[newcolor][newsize]["slug"]}`;
+        const url = `${process.env.NEXT_PUBLIC_HOST}/product/${variants[newcolor][newsize]["slug"]}`;
         window.location = url;
     };
 
