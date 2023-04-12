@@ -4,9 +4,12 @@ import '@/styles/globals.css'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
+
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({})
   const [subTotal, setSubTotal] = useState(0)
+  const [user, setUser] = useState({value : null})
+  const [key, setKey] = useState(0)
 
   useEffect(() => {
 
@@ -20,6 +23,12 @@ export default function App({ Component, pageProps }) {
       console.error(error);
       localStorage.clear()
     }
+    const token = localStorage.getItem('token')
+    if (token) {
+      setUser({value : token})
+      setKey(Math.random())
+    }
+
   }, [])
 
   const router= useRouter()
@@ -75,10 +84,16 @@ export default function App({ Component, pageProps }) {
     router.push('/checkout')
   }
 
+  const logout = () => {
+    localStorage.removeItem('token')
+    setUser({value : null})
+    setKey(Math.random())
+  }
+
 
   return <>
-    <Navbar cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal}/>
-    <Component {...pageProps} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} buyNow={buyNow}/>
+    <Navbar user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal}/>
+    <Component {...pageProps} logout={logout} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} buyNow={buyNow}/>
     <Footer cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal}/> 
     </>
 }

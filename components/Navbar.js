@@ -7,7 +7,7 @@ import {
   AiFillShopping,
 } from "react-icons/ai";
 
-const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
+const Navbar = ({ user, cart, addToCart, removeFromCart, clearCart, subTotal }) => {
 
   const ref = useRef();
   const toggleCart = () => {
@@ -38,9 +38,11 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
             <Link href={"/mugs"} className="mr-5 hover:text-white">Mugs</Link>
             <Link href={"/"} className="mr-5 hover:text-white">Fourth Link</Link>
           </nav>
-          <button onClick={toggleCart} className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">Your Cart
 
-          </button>
+          <button onClick={toggleCart} className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">My Cart</button>
+          {user.value && <button className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0 mx-3">My Account</button>}
+          {!user.value && <Link href={"/login"}>
+            <button className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0 mx-3">Login</button></Link>}
         </div>
       </header>
 
