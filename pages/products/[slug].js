@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import mongoose from "mongoose";
-import Product from '@/models/Product';
+import Product from '../../models/Product';
 
 import React from 'react'
-require('dotenv').config();
 
 const Post = ({ addToCart, buyNow, product, variants }) => {
     const router = useRouter()
@@ -12,6 +11,9 @@ const Post = ({ addToCart, buyNow, product, variants }) => {
 
     const [pin, setPin] = useState('')
     const [service, setService] = useState('')
+
+    const [color, setColor] = useState(product.color);
+    const [size, setSize] = useState(product.size);
 
     const checkServiceAvailability = async () => {
         let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
