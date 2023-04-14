@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({})
   const [subTotal, setSubTotal] = useState(0)
   const [user, setUser] = useState({ value: null })
-  const [key, setKey] = useState()
+  // const [key, setKey] = useState()
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }) {
     const token = localStorage.getItem('token')
     if (token) {
       setUser({ value: token })
-      setKey(Math.random())
+      // setKey(Math.random())
     }
 
   }, [])
@@ -43,14 +43,16 @@ export default function App({ Component, pageProps }) {
   const router = useRouter()
 
   const saveCart = (myCart) => {
-    localStorage.setItem("cart", JSON.stringify(myCart))
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("cart", JSON.stringify(myCart))
 
-    let subt = 0
-    let keys = Object.keys(myCart)
-    for (let i = 0; i < keys.length; i++) {
-      subt += myCart[keys[i]].qty * myCart[keys[i]].price
+      let subt = 0
+      let keys = Object.keys(myCart)
+      for (let i = 0; i < keys.length; i++) {
+        subt += myCart[keys[i]].qty * myCart[keys[i]].price
+      }
+      setSubTotal(subt)
     }
-    setSubTotal(subt)
   }
 
   const addToCart = (itemCode, qty, price, name, size, variant) => {
@@ -90,21 +92,21 @@ export default function App({ Component, pageProps }) {
 
     setCart(newCart)
     saveCart(newCart)
-    router.push('/checkout')
+    router.push('http://localhost:3000/checkout')
   }
 
   const logout = () => {
     localStorage.removeItem('token')
     setUser({ value: null })
-    setKey(Math.random())
+    // setKey(Math.random())
     router.push('/')
   }
 
 
   return <>
     <LoadingBar color='#EF4444' height={3} progress={progress} onLoaderFinished={() => setProgress(0)} waitingTime={500} />
-    {key && <Navbar user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />}    
-    {!key && <Navbar user={user} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />}    
+    <Navbar user={user} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
+    {/* {!key && <Navbar user={user} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />}     */}
     <Component {...pageProps} logout={logout} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} buyNow={buyNow} />
     <Footer cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
   </>
