@@ -52,6 +52,8 @@ export default function App({ Component, pageProps }) {
         subt += myCart[keys[i]].qty * myCart[keys[i]].price
       }
       setSubTotal(subt)
+
+      // localStorage.setItem("subtotal", JSON.stringify(subt))
     }
   }
 
@@ -88,11 +90,12 @@ export default function App({ Component, pageProps }) {
 
   const buyNow = (itemCode, qty, price, name, size, variant) => {
 
-    let newCart = { itemCode: { qty, price, name, size, variant } };
+    let newCart = { itemCode, qty, price, name, size, variant  };
 
     setCart(newCart)
     saveCart(newCart)
-    router.push('http://localhost:3000/checkout')
+    router.push('/checkout')
+
   }
 
   const logout = () => {
@@ -107,7 +110,8 @@ export default function App({ Component, pageProps }) {
     <LoadingBar color='#EF4444' height={3} progress={progress} onLoaderFinished={() => setProgress(0)} waitingTime={500} />
     <Navbar user={user} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
     {/* {!key && <Navbar user={user} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />}     */}
-    <Component {...pageProps} logout={logout} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} buyNow={buyNow} />
+    <Component {...pageProps} logout={logout} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} buyNow={buyNow}
+    />
     <Footer cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
   </>
 }

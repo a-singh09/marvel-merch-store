@@ -5,7 +5,9 @@ import Product from '../../models/Product';
 
 import React from 'react'
 
-const Post = ({ addToCart, buyNow, product, variants }) => {
+const Post = ({ addToCart, 
+     buyNow, 
+    product, variants }) => {
     const router = useRouter()
     const { slug } = router.query
 
@@ -195,7 +197,7 @@ const Post = ({ addToCart, buyNow, product, variants }) => {
                             </div>
                             <div className="flex">
                                 <span className="title-font font-medium text-2xl text-white">${product.price}</span>
-                                <button onClick={buyNow(slug, 1, product.price, product.title, size, color)} className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Buy Now</button>
+                                <button onClick={() => buyNow(slug, 1, product.price, product.title, product.size, product.color)} className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Buy Now</button>
                                 <button onClick={() => addToCart(slug, 1, product.price, product.title, size, color)} className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Add to Cart</button>
                                 <button className="rounded-full w-10 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                                     <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
